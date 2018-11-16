@@ -2,6 +2,11 @@ har-rs
 ======
 [HTTP Archive format (HAR)][har] serializing & deserializing library, written purely in Rust.
 
+[![Build Status](https://travis-ci.org/mandrean/har-rs.svg?branch=master)](https://travis-ci.org/mandrean/har-rs)
+[![Latest version](https://img.shields.io/crates/v/har.svg)](https://crates.io/crates/har)
+[![Documentation](https://docs.rs/har/badge.svg)](https://docs.rs/har)
+![License](https://img.shields.io/crates/l/har.svg)
+
 Install
 -------
 Add the following to your `Cargo.toml` file:
