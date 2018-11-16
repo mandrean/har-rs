@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/mandrean/har-rs"
 documentation = "https://docs.rs/har"
 readme = "README.md"
-keywords = ["har", "serialization", "deserialization", "json", "yaml", "serde"]
+keywords = ["har", "serialization", "deserialization", "json", "yaml"]
 
 [badges]
 travis-ci = { repository = "mandrean/har-rs" }
