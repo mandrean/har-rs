@@ -1,6 +1,6 @@
 har-rs
 ======
-[HTTP Archive format (HAR)][har] serializing & deserializing library, written purely in Rust.
+[HTTP Archive format (HAR)][har] serialization & deserialization library, written in Rust.
 
 [![Build Status](https://travis-ci.org/mandrean/har-rs.svg?branch=master)](https://travis-ci.org/mandrean/har-rs)
 [![Latest version](https://img.shields.io/crates/v/har.svg)](https://crates.io/crates/har)
