@@ -16,6 +16,7 @@ use std::io::Read;
 use std::path::Path;
 
 pub mod v1_2;
+pub mod v1_3;
 pub use errors::{Result, ResultExt};
 
 const MINIMUM_HAR12_VERSION: &str = ">= 1.2";
@@ -31,6 +32,7 @@ pub mod errors {
         }
 
         errors {
+            /// Deprecated - not generated anymore.
             UnsupportedSpecFileVersion(version: ::semver::Version) {
                 description("Unsupported HAR file version")
                 display("Unsupported HAR file version ({}). Expected {}", version, ::MINIMUM_HAR12_VERSION)
@@ -40,16 +42,34 @@ pub mod errors {
 }
 
 /// Supported versions of HAR.
+///
+/// Note that point releases require adding here (as they must other wise they wouldn't need a new version)
+/// Using untagged can avoid that but the errors on incompatible documents become super hard to debug.
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
-#[serde(untagged)]
-pub enum Har {
+#[serde(tag = "version")]
+pub enum Spec {
     /// Version 1.2 of the HAR specification.
     ///
     /// Refer to the official
     /// [specification](https://w3c.github.io/web-performance/specs/HAR/Overview.html)
     /// for more information.
     #[allow(non_camel_case_types)]
-    V1_2(v1_2::Spec),
+    #[serde(rename = "1.2")]
+    V1_2(v1_2::Log),
+
+    // Version 1.3 of the HAR specification.
+    //
+    // Refer to the draft
+    // [specification](https://github.com/ahmadnassri/har-spec/blob/master/versions/1.3.md)
+    // for more information.
+    #[allow(non_camel_case_types)]
+    #[serde(rename = "1.3")]
+    V1_3(v1_3::Log),
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+pub struct Har {
+    pub log: Spec,
 }
 
 /// Deserialize a HAR from a path
@@ -173,8 +193,11 @@ mod tests {
     // Makes sure the paths to the test fixtures works on this platform
     #[test]
     fn can_find_test_fixtures() {
-        let fixtures: Vec<std::result::Result<std::path::PathBuf, glob::GlobError> > = glob(FIXTURES_GLOB)
-            .expect("Failed to read glob pattern").filter(|e| e.is_ok()).collect();
+        let fixtures: Vec<std::result::Result<std::path::PathBuf, glob::GlobError>> =
+            glob(FIXTURES_GLOB)
+                .expect("Failed to read glob pattern")
+                .filter(|e| e.is_ok())
+                .collect();
         assert_ne!(0, fixtures.len());
     }
 
@@ -208,9 +231,19 @@ mod tests {
                 compare_spec_through_json(&path, &save_path_base);
 
             if parsed_spec_json_str != spec_json_str {
-                invalid_diffs.push((api_filename, parsed_spec_json_str.clone(), spec_json_str.clone()));
-                File::create(path.with_extension("parsed")).unwrap().write_all(parsed_spec_json_str.as_bytes()).unwrap();
-                File::create(path.with_extension("pretty")).unwrap().write_all(spec_json_str.as_bytes()).unwrap();
+                invalid_diffs.push((
+                    api_filename,
+                    parsed_spec_json_str.clone(),
+                    spec_json_str.clone(),
+                ));
+                File::create(path.with_extension("parsed"))
+                    .unwrap()
+                    .write_all(parsed_spec_json_str.as_bytes())
+                    .unwrap();
+                File::create(path.with_extension("pretty"))
+                    .unwrap()
+                    .write_all(spec_json_str.as_bytes())
+                    .unwrap();
             }
         }
 
