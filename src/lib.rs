@@ -85,6 +85,8 @@ mod tests {
     use std::fs::File;
     use std::io::Write;
 
+    const FIXTURES_GLOB: &str = "/tests/fixtures/*.har";
+
     /// Helper function for reading a file to string.
     fn read_file<P>(path: P) -> String
     where
@@ -168,10 +170,18 @@ mod tests {
         (api_filename, parsed_spec_json_str, spec_json_str)
     }
 
+    // Makes sure the paths to the test fixtures works on this platform
+    #[test]
+    fn can_find_test_fixtures() {
+        let fixtures: Vec<std::result::Result<std::path::PathBuf, glob::GlobError> > = glob(FIXTURES_GLOB)
+            .expect("Failed to read glob pattern").filter(|e| e.is_ok()).collect();
+        assert_ne!(0, fixtures.len());
+    }
+
     // Just tests if the deserialization does not blow up. But does not test correctness
     #[test]
     fn can_deserialize() {
-        for entry in glob("/tests/fixtures/*.har").expect("Failed to read glob pattern") {
+        for entry in glob(FIXTURES_GLOB).expect("Failed to read glob pattern") {
             let entry = entry.unwrap();
             let path = entry.as_path();
             // cargo test -- --nocapture to see this message
@@ -188,7 +198,7 @@ mod tests {
                 .collect();
         let mut invalid_diffs = Vec::new();
 
-        for entry in glob("/tests/fixtures/*.har").expect("Failed to read glob pattern") {
+        for entry in glob(FIXTURES_GLOB).expect("Failed to read glob pattern") {
             let entry = entry.unwrap();
             let path = entry.as_path();
 
