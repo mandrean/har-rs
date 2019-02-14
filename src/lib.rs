@@ -85,7 +85,7 @@ mod tests {
     use std::fs::File;
     use std::io::Write;
 
-    const FIXTURES_GLOB: &str = "/tests/fixtures/*.har";
+    const FIXTURES_GLOB: &str = "tests/fixtures/*.har";
 
     /// Helper function for reading a file to string.
     fn read_file<P>(path: P) -> String
@@ -208,7 +208,9 @@ mod tests {
                 compare_spec_through_json(&path, &save_path_base);
 
             if parsed_spec_json_str != spec_json_str {
-                invalid_diffs.push((api_filename, parsed_spec_json_str, spec_json_str));
+                invalid_diffs.push((api_filename, parsed_spec_json_str.clone(), spec_json_str.clone()));
+                File::create(path.with_extension("parsed")).unwrap().write_all(parsed_spec_json_str.as_bytes()).unwrap();
+                File::create(path.with_extension("pretty")).unwrap().write_all(spec_json_str.as_bytes()).unwrap();
             }
         }
 
