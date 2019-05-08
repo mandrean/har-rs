@@ -17,7 +17,7 @@ use std::path::Path;
 
 pub mod v1_2;
 pub mod v1_3;
-pub use errors::{Result, ResultExt};
+pub use crate::errors::{Result, ResultExt};
 
 const MINIMUM_HAR12_VERSION: &str = ">= 1.2";
 
@@ -35,7 +35,7 @@ pub mod errors {
             /// Deprecated - not generated anymore.
             UnsupportedSpecFileVersion(version: ::semver::Version) {
                 description("Unsupported HAR file version")
-                display("Unsupported HAR file version ({}). Expected {}", version, ::MINIMUM_HAR12_VERSION)
+                display("Unsupported HAR file version ({}). Expected {}", version, crate::MINIMUM_HAR12_VERSION)
             }
         }
     }

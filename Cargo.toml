@@ -2,6 +2,7 @@
 name = "har"
 version = "0.2.0"
 authors = ["Sebastian Mandrean <sebastian.mandrean@gmail.com>"]
+edition = "2018"
 description = "A HTTP Archive format (HAR) serialization & deserialization library."
 license = "MIT"
 repository = "https://github.com/mandrean/har-rs"
