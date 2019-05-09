@@ -32,7 +32,7 @@ script:
 
 after_success:
 - |
-  RUST_LOG=debug semantic-rs
+  CI=true RUST_LOG=debug semantic-rs
 
 env:
   global:
