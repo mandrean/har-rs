@@ -23,6 +23,7 @@ const MINIMUM_HAR12_VERSION: &str = ">= 1.2";
 
 /// Errors that HAR functions may return
 pub mod errors {
+    #![allow(deprecated)]
     error_chain! {
         foreign_links {
             Io(::std::io::Error);
