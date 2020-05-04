@@ -31,9 +31,9 @@ pub struct Pages {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct PageTimings {
     #[serde(rename = "onContentLoad")]
-    pub on_content_load: Option<i64>,
+    pub on_content_load: Option<f64>,
     #[serde(rename = "onLoad")]
-    pub on_load: Option<i64>,
+    pub on_load: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
 }
@@ -43,7 +43,7 @@ pub struct Entries {
     pub pageref: Option<String>,
     #[serde(rename = "startedDateTime")]
     pub started_date_time: String,
-    pub time: i64,
+    pub time: f64,
     pub request: Request,
     pub response: Response,
     pub cache: Cache,
@@ -187,13 +187,13 @@ pub struct CacheEntity {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Timings {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub blocked: Option<i64>,
-    pub dns: Option<i64>,
-    pub connect: Option<i64>,
-    pub send: i64,
-    pub wait: i64,
-    pub receive: i64,
-    pub ssl: Option<i64>,
+    pub blocked: Option<f64>,
+    pub dns: Option<f64>,
+    pub connect: Option<f64>,
+    pub send: f64,
+    pub wait: f64,
+    pub receive: f64,
+    pub ssl: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
 }
