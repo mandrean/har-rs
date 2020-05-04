@@ -1,3 +1,25 @@
+<a name="v0.4.0"></a>
+## v0.4.0 (2020-05-04)
+
+
+#### Breaking Changes
+
+*   Allow floating point number in timing metrics (#8) ([4773e5ea](4773e5ea))
+
+#### Documentation
+
+*   Generate new changelog for v0.3.0 using custom Clog config ([60feb71a](60feb71a))
+
+#### Refactorings
+
+*   Allow floating point number in timing metrics (#8) ([4773e5ea](4773e5ea))
+
+#### Builds
+
+*   Add Clog config ([b1ac66a3](b1ac66a3))
+
+
+
 <a name="v0.3.0"></a>
 ## v0.3.0 (2019-05-09)
 
