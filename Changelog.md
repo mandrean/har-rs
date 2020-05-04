@@ -1,3 +1,17 @@
+<a name="v0.5.0"></a>
+## v0.5.0 (2020-05-04)
+
+
+#### Bug Fixes
+
+*   Port HAR v1.2 fp metrics fixes to HAR v1.3 (#12) ([5c60c183](5c60c183))
+
+#### Breaking Changes
+
+*   Port HAR v1.2 fp metrics fixes to HAR v1.3 (#12) ([5c60c183](5c60c183))
+
+
+
 <a name="v0.4.0"></a>
 ## v0.4.0 (2020-05-04)
 
