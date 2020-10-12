@@ -31,7 +31,7 @@ fn main() {
 
 Contribute
 ----------
-This project follows [semver], [conventional commits] and semantic releasing using [semantic-rs].
+This project follows [semver], [conventional commits] and semantic releasing using [mandrean/semantic-rs].
 
 Note
 ----
@@ -40,4 +40,4 @@ Inspired by [softprops/openapi](https://github.com/softprops/openapi).
 [har]: https://en.wikipedia.org/wiki/.har
 [semver]: https://semver.org/
 [conventional commits]: https://www.conventionalcommits.org
-[semantic-rs]: https://github.com/semantic-rs/semantic-rs
+[mandrean/semantic-rs]: https://github.com/mandrean/semantic-rs
