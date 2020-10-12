@@ -110,7 +110,8 @@ pub struct QueryString {
 pub struct PostData {
     #[serde(rename = "mimeType")]
     pub mime_type: String,
-    pub text: String,
+    /// Either text or params but not both : TODO turn into an untagged enum
+    pub text: Option<String>,
     pub params: Option<Vec<Params>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
