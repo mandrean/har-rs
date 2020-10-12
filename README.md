@@ -13,7 +13,7 @@ Add the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-har = "0.5"
+har = "0.6"
 ```
 
 Use
