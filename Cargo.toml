@@ -10,9 +10,6 @@ documentation = "https://docs.rs/har"
 readme = "README.md"
 keywords = ["har", "serialization", "deserialization", "json", "yaml"]
 
-[badges]
-travis-ci = { repository = "mandrean/har-rs" }
-
 [dependencies]
 error-chain = "0.12.0"
 serde = "1.0.80"
