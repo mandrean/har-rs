@@ -130,8 +130,6 @@ pub struct Params {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Response {
-    #[serde(rename = "_charlesStatus")]
-    pub charles_status: Option<String>,
     pub status: i64,
     #[serde(rename = "statusText")]
     pub status_text: String,
