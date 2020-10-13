@@ -10,18 +10,17 @@ documentation = "https://docs.rs/har"
 readme = "README.md"
 keywords = ["har", "serialization", "deserialization", "json", "yaml"]
 
-[badges]
-travis-ci = { repository = "mandrean/har-rs" }
-
 [dependencies]
 error-chain = "0.12.0"
 serde = "1.0.80"
 serde_derive = "1.0.80"
 serde_json = "1.0.33"
 serde_yaml = "0.8.7"
-semver = "0.9.0"
-url = "1.7.2"
-url_serde = "0.2.0"
+semver = "0.11.0"
+
+[dependencies.serde_with]
+version = "1.5.1"
+features = ["serde_with_macros"]
 
 [dev-dependencies]
 glob = "0.3.0"

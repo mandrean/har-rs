@@ -8,8 +8,6 @@ extern crate semver;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_yaml;
-extern crate url;
-extern crate url_serde;
 
 use std::fs::File;
 use std::io::Read;

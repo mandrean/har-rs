@@ -18,7 +18,7 @@ before_script:
 - |
   pip install 'travis-cargo<0.2' --user &&
   cargo uninstall semantic-rs ;
-  cargo install --git https://github.com/semantic-rs/semantic-rs --debug &&
+  cargo install --git https://github.com/mandrean/semantic-rs --debug &&
   export PATH=$HOME/.cargo/bin:$PATH &&
   export RUST_BACKTRACE=1 &&
   git config --global user.name semantic-rs &&
