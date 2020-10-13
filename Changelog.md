@@ -1,3 +1,40 @@
+<a name="v0.6.0"></a>
+## v0.6.0 (2020-10-13)
+
+
+#### Continuous Integrations
+
+*   Set up GitHub Actions V2 (#15) ([da5dd0be](da5dd0be))
+*   Switch to mandrean/semantic-rs fork ([c16c53aa](c16c53aa))
+
+#### Refactorings
+
+*   Remove url_serde ([7b28586c](7b28586c))
+*   Use serde_with to remove repetitive annotations ([e18e6bb8](e18e6bb8))
+*   Make postData.text optional ([c877f81b](c877f81b))
+*   Remove _charlesStatus residues ([b36733f4](b36733f4))
+
+#### Documentation
+
+*   Bump version in README ([d02f4cfc](d02f4cfc))
+
+#### Breaking Changes
+
+*   Make postData.text optional ([c877f81b](c877f81b))
+*   Remove _charlesStatus residues ([b36733f4](b36733f4))
+
+#### Tests
+
+*   Fix regression in fixtures ([6e884adc](6e884adc))
+
+#### Chores
+
+*   Remove deprecated badges section ([004dfc6b](004dfc6b))
+*   Check in lockfile ([945247b4](945247b4))
+*   Bump dependencies ([46f1fb00](46f1fb00))
+
+
+
 <a name="v0.5.0"></a>
 ## v0.5.0 (2020-05-04)
 
