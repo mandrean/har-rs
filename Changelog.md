@@ -1,3 +1,17 @@
+<a name="v0.6.1"></a>
+## v0.6.1 (2020-10-13)
+
+
+#### Bug Fixes
+
+*   Revert "Check in lockfile" (#16) ([0c5ed643](0c5ed643))
+
+#### Continuous Integrations
+
+*   Explicitly set semantic-rs modes ([10cc3d2d](10cc3d2d))
+
+
+
 <a name="v0.6.0"></a>
 ## v0.6.0 (2020-10-13)
 
