@@ -74,7 +74,7 @@ jobs:
         run: |
           cargo install --git https://github.com/mandrean/semantic-rs
       - name: Semantic Release
-        run: semantic-rs
+        run: semantic-rs -r yes -w yes
         env:
           CI: true
           RUST_LOG: debug
