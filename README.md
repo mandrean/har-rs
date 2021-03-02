@@ -18,6 +18,7 @@ har = "0.7"
 
 Use
 ---
+Simplest possible example:
 ```rust
 use har::from_path;
 
@@ -29,6 +30,8 @@ fn main() {
 }
 ```
 
+See [docs.rs/har] for the full library API documentation.
+
 Contribute
 ----------
 This project follows [semver], [conventional commits] and semantic releasing using [mandrean/semantic-rs].
@@ -37,7 +40,8 @@ Note
 ----
 Inspired by [softprops/openapi](https://github.com/softprops/openapi).
 
-[har]: https://en.wikipedia.org/wiki/.har
-[semver]: https://semver.org/
 [conventional commits]: https://www.conventionalcommits.org
+[docs.rs/har]: https://docs.rs/har
+[har]: https://en.wikipedia.org/wiki/.har
 [mandrean/semantic-rs]: https://github.com/mandrean/semantic-rs
+[semver]: https://semver.org/
