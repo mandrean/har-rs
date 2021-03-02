@@ -1,3 +1,22 @@
+<a name="v0.7.0"></a>
+## v0.7.0 (2021-03-02)
+
+
+#### Documentation
+
+*   Bump version in README ([3516ab8d](3516ab8d))
+
+#### Chores
+
+*   Bump deps ([a76b71be](a76b71be))
+
+#### Continuous Integrations
+
+*   Add cache restore keys ([dfabe51b](dfabe51b))
+*   Disable continuous delivery for now ([043dbd72](043dbd72))
+
+
+
 <a name="v0.6.1"></a>
 ## v0.6.1 (2020-10-13)
 
