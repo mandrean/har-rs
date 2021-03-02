@@ -6,6 +6,14 @@
 
 *   Bump version in README ([3516ab8d](3516ab8d))
 
+#### Refactorings
+
+*   Switch to using thiserror ([d162c8ba](d162c8ba))
+
+#### Breaking Changes
+
+*   Switch to using thiserror ([d162c8ba](d162c8ba))
+
 #### Chores
 
 *   Bump deps ([a76b71be](a76b71be))
