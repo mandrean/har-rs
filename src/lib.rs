@@ -1,13 +1,4 @@
-#[macro_use]
-extern crate error_chain;
-#[macro_use]
-extern crate serde_derive;
-#[cfg(test)]
-extern crate glob;
-extern crate semver;
-extern crate serde;
-extern crate serde_json;
-extern crate serde_yaml;
+use serde::{Deserialize, Serialize};
 
 use std::fs::File;
 use std::io::Read;
@@ -15,29 +6,16 @@ use std::path::Path;
 
 pub mod v1_2;
 pub mod v1_3;
-pub use crate::errors::{Result, ResultExt};
-
-const MINIMUM_HAR12_VERSION: &str = ">= 1.2";
 
 /// Errors that HAR functions may return
-pub mod errors {
-    #![allow(deprecated)]
-    error_chain! {
-        foreign_links {
-            Io(::std::io::Error);
-            Yaml(::serde_yaml::Error);
-            Serialize(::serde_json::Error);
-            SemVerError(::semver::SemVerError);
-        }
-
-        errors {
-            /// Deprecated - not generated anymore.
-            UnsupportedSpecFileVersion(version: ::semver::Version) {
-                description("Unsupported HAR file version")
-                display("Unsupported HAR file version ({}). Expected {}", version, crate::MINIMUM_HAR12_VERSION)
-            }
-        }
-    }
+#[derive(thiserror::Error, Debug)]
+pub enum Error {
+    #[error("error reading file")]
+    Io(#[from] ::std::io::Error),
+    #[error("error serializing YAML")]
+    Yaml(#[from] ::serde_yaml::Error),
+    #[error("error serializing JSON")]
+    Json(#[from] ::serde_json::Error),
 }
 
 /// Supported versions of HAR.
@@ -72,7 +50,7 @@ pub struct Har {
 }
 
 /// Deserialize a HAR from a path
-pub fn from_path<P>(path: P) -> errors::Result<Har>
+pub fn from_path<P>(path: P) -> Result<Har, Error>
 where
     P: AsRef<Path>,
 {
@@ -80,7 +58,7 @@ where
 }
 
 /// Deserialize a HAR from type which implements Read
-pub fn from_reader<R>(read: R) -> errors::Result<Har>
+pub fn from_reader<R>(read: R) -> Result<Har, Error>
 where
     R: Read,
 {
@@ -88,12 +66,12 @@ where
 }
 
 /// Serialize HAR spec to a YAML string
-pub fn to_yaml(spec: &Har) -> errors::Result<String> {
+pub fn to_yaml(spec: &Har) -> Result<String, Error> {
     Ok(serde_yaml::to_string(spec)?)
 }
 
 /// Serialize HAR spec to JSON string
-pub fn to_json(spec: &Har) -> errors::Result<String> {
+pub fn to_json(spec: &Har) -> Result<String, Error> {
     Ok(serde_json::to_string_pretty(spec)?)
 }
 

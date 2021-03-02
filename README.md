@@ -19,7 +19,7 @@ har = "0.6"
 Use
 ---
 ```rust
-extern crate har;
+use har::from_path;
 
 fn main() {
   match har::from_path("path/to/file.har") {
