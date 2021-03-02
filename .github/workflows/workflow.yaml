@@ -54,31 +54,31 @@ jobs:
         with:
           command: test
 
-  release:
-    name: Release
-    needs: check
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - name: Install semantic-rs
-        run: |
-          cargo install --git https://github.com/mandrean/semantic-rs
-      - name: Semantic Release
-        run: semantic-rs -r yes -w yes
-        env:
-          CI: true
-          RUST_LOG: debug
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
-          GIT_COMMITTER_NAME: semantic-rs
-          GIT_COMMITTER_EMAIL: semantic@rs
+#  release:
+#    name: Release
+#    needs: check
+#    runs-on: ubuntu-latest
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+#    steps:
+#      - name: Checkout Repo
+#        uses: actions/checkout@v2
+#      - uses: actions/cache@v2
+#        with:
+#          path: |
+#            ~/.cargo/registry
+#            ~/.cargo/git
+#            ~/.cargo/bin
+#            target
+#          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+#      - name: Install semantic-rs
+#        run: |
+#          cargo install --git https://github.com/mandrean/semantic-rs
+#      - name: Semantic Release
+#        run: semantic-rs -r yes -w yes
+#        env:
+#          CI: true
+#          RUST_LOG: debug
+#          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#          CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+#          GIT_COMMITTER_NAME: semantic-rs
+#          GIT_COMMITTER_EMAIL: semantic@rs
