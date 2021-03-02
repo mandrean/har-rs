@@ -2,7 +2,7 @@ har-rs
 ======
 [HTTP Archive format (HAR)][har] serialization & deserialization library, written in Rust.
 
-![Build Status](https://github.com/mandrean/har-rs/workflows/CI/badge.svg?branch=master)
+<!---![Build Status](https://github.com/mandrean/har-rs/workflows/CI/badge.svg?branch=master)-->
 [![Latest version](https://img.shields.io/crates/v/har.svg)](https://crates.io/crates/har)
 [![Documentation](https://docs.rs/har/badge.svg)](https://docs.rs/har)
 ![License](https://img.shields.io/crates/l/har.svg)
@@ -13,13 +13,13 @@ Add the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-har = "0.6"
+har = "0.7"
 ```
 
 Use
 ---
 ```rust
-extern crate har;
+use har::from_path;
 
 fn main() {
   match har::from_path("path/to/file.har") {
