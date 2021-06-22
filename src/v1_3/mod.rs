@@ -147,7 +147,7 @@ pub struct Response {
     pub headers: Vec<Headers>,
     pub content: Content,
     #[serde(rename = "redirectURL")]
-    pub redirect_url: String,
+    pub redirect_url: Option<String>,
     #[serde(rename = "headersSize")]
     pub headers_size: i64,
     #[serde(rename = "bodySize")]
