@@ -1,3 +1,22 @@
+<a name="v0.7.1"></a>
+## v0.7.1 (2021-10-18)
+
+
+#### Chores
+
+*   Remove unused dep ([fd10256a](fd10256a))
+*   Manually patch the changelog ([d9dd610e](d9dd610e))
+
+#### Bug Fixes
+
+*   Make some fields optional (#22) ([ccdcfca4](ccdcfca4))
+
+#### Documentation
+
+*   Clarify library usage/documentation ([21f6a917](21f6a917))
+
+
+
 <a name="v0.7.0"></a>
 ## v0.7.0 (2021-03-02)
 
