@@ -71,11 +71,18 @@ pub struct Request {
     pub query_string: Vec<QueryString>,
     #[serde(rename = "postData")]
     pub post_data: Option<PostData>,
-    #[serde(rename = "headersSize")]
+    #[serde(rename = "headersSize", deserialize_with = "de_request_headers_size")]
     pub headers_size: i64,
     #[serde(rename = "bodySize")]
     pub body_size: i64,
     pub comment: Option<String>,
+}
+
+fn de_request_headers_size<'de, D>(deserializer: D) -> Result<i64, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    Ok(Option::<i64>::deserialize(deserializer)?.unwrap_or(-1))
 }
 
 #[skip_serializing_none]
@@ -144,16 +151,21 @@ pub struct Response {
     pub content: Content,
     #[serde(rename = "redirectURL")]
     pub redirect_url: Option<String>,
-    #[serde(rename = "headersSize")]
+    #[serde(rename = "headersSize", default = "default_response_headers_size")]
     pub headers_size: i64,
     #[serde(rename = "bodySize")]
     pub body_size: i64,
     pub comment: Option<String>,
 }
 
+fn default_response_headers_size() -> i64 {
+    -1
+}
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Content {
+    #[serde(default = "default_content_size")]
     pub size: i64,
     pub compression: Option<i64>,
     #[serde(rename = "mimeType")]
@@ -161,6 +173,10 @@ pub struct Content {
     pub text: Option<String>,
     pub encoding: Option<String>,
     pub comment: Option<String>,
+}
+
+fn default_content_size() -> i64 {
+    -1
 }
 
 #[skip_serializing_none]
@@ -191,8 +207,11 @@ pub struct Timings {
     pub blocked: Option<f64>,
     pub dns: Option<f64>,
     pub connect: Option<f64>,
+    #[serde(default)]
     pub send: f64,
+    #[serde(default)]
     pub wait: f64,
+    #[serde(default)]
     pub receive: f64,
     pub ssl: Option<f64>,
     pub comment: Option<String>,
