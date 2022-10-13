@@ -170,12 +170,12 @@ mod tests {
     // Makes sure the paths to the test fixtures works on this platform
     #[test]
     fn can_find_test_fixtures() {
-        let fixtures: Vec<std::result::Result<std::path::PathBuf, glob::GlobError>> =
+        let fixture_count =
             glob(FIXTURES_GLOB)
                 .expect("Failed to read glob pattern")
                 .filter(|e| e.is_ok())
-                .collect();
-        assert_ne!(0, fixtures.len());
+                .count();
+        assert_ne!(0, fixture_count);
     }
 
     // Just tests if the deserialization does not blow up. But does not test correctness
@@ -205,7 +205,7 @@ mod tests {
             println!("Testing if {:?} is deserializable", path);
 
             let (api_filename, parsed_spec_json_str, spec_json_str) =
-                compare_spec_through_json(&path, &save_path_base);
+                compare_spec_through_json(path, &save_path_base);
 
             if parsed_spec_json_str != spec_json_str {
                 invalid_diffs.push((

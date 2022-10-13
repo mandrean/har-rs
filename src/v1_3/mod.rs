@@ -34,9 +34,9 @@ pub struct Pages {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct PageTimings {
-    #[serde(rename = "onContentLoad")]
+    #[serde(rename = "onContentLoad", default = "default_fsize_maybe")]
     pub on_content_load: Option<f64>,
-    #[serde(rename = "onLoad")]
+    #[serde(rename = "onLoad", default = "default_fsize_maybe")]
     pub on_load: Option<f64>,
     pub comment: Option<String>,
 }
@@ -71,9 +71,9 @@ pub struct Request {
     pub query_string: Vec<QueryString>,
     #[serde(rename = "postData")]
     pub post_data: Option<PostData>,
-    #[serde(rename = "headersSize")]
+    #[serde(rename = "headersSize", deserialize_with = "de_default_isize")]
     pub headers_size: i64,
-    #[serde(rename = "bodySize")]
+    #[serde(rename = "bodySize", default = "default_isize")]
     pub body_size: i64,
     pub comment: Option<String>,
     #[serde(rename = "headersCompression")]
@@ -148,9 +148,9 @@ pub struct Response {
     pub content: Content,
     #[serde(rename = "redirectURL")]
     pub redirect_url: Option<String>,
-    #[serde(rename = "headersSize")]
+    #[serde(rename = "headersSize", default = "default_isize")]
     pub headers_size: i64,
-    #[serde(rename = "bodySize")]
+    #[serde(rename = "bodySize", default = "default_isize")]
     pub body_size: i64,
     pub comment: Option<String>,
     #[serde(rename = "headersCompression")]
@@ -160,6 +160,7 @@ pub struct Response {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Content {
+    #[serde(default = "default_isize")]
     pub size: i64,
     pub compression: Option<i64>,
     #[serde(rename = "mimeType")]
@@ -194,12 +195,31 @@ pub struct CacheEntity {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Timings {
+    #[serde(default = "default_fsize_maybe")]
     pub blocked: Option<f64>,
+    #[serde(default = "default_fsize_maybe")]
     pub dns: Option<f64>,
+    #[serde(default = "default_fsize_maybe")]
     pub connect: Option<f64>,
     pub send: f64,
     pub wait: f64,
     pub receive: f64,
+    #[serde(default = "default_fsize_maybe")]
     pub ssl: Option<f64>,
     pub comment: Option<String>,
+}
+
+fn de_default_isize<'de, D>(deserializer: D) -> Result<i64, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+{
+    Ok(Option::<i64>::deserialize(deserializer)?.unwrap_or(-1))
+}
+
+fn default_isize() -> i64 {
+    -1
+}
+
+fn default_fsize_maybe() -> Option<f64> {
+    Some(-1 as f64)
 }
