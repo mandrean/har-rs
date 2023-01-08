@@ -204,8 +204,8 @@ pub struct Timings {
 }
 
 fn de_default_isize<'de, D>(deserializer: D) -> Result<i64, D::Error>
-    where
-        D: serde::Deserializer<'de>,
+where
+    D: serde::Deserializer<'de>,
 {
     Ok(Option::<i64>::deserialize(deserializer)?.unwrap_or(-1))
 }
@@ -215,5 +215,5 @@ fn default_isize() -> i64 {
 }
 
 fn default_fsize_maybe() -> Option<f64> {
-    Some(-1 as f64)
+    Some(-1_f64)
 }
