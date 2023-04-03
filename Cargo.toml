@@ -1,6 +1,6 @@
 [package]
 name = "har"
-version = "0.8.0"
+version = "0.8.1"
 authors = ["Sebastian Mandrean <sebastian.mandrean@gmail.com>"]
 edition = "2021"
 description = "A HTTP Archive format (HAR) serialization & deserialization library."

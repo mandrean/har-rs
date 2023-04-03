@@ -62,7 +62,7 @@ pub fn from_reader<R>(read: R) -> Result<Har, Error>
 where
     R: Read,
 {
-    Ok(serde_yaml::from_reader::<R, Har>(read)?)
+    Ok(serde_json::from_reader::<R, Har>(read)?)
 }
 
 /// Serialize HAR spec to a YAML string
