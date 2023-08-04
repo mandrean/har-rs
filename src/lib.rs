@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use std::fs::File;
-use std::io::Read;
+use std::io::{BufReader, Read};
 use std::path::Path;
 
 pub mod v1_2;
@@ -54,7 +54,7 @@ pub fn from_path<P>(path: P) -> Result<Har, Error>
 where
     P: AsRef<Path>,
 {
-    from_reader(File::open(path)?)
+    from_reader(BufReader::new(File::open(path)?))
 }
 
 /// Deserialize a HAR from type which implements Read
