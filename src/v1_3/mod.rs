@@ -201,9 +201,12 @@ pub struct Timings {
     pub dns: Option<f64>,
     #[serde(default = "default_fsize_maybe")]
     pub connect: Option<f64>,
-    pub send: f64,
-    pub wait: f64,
-    pub receive: f64,
+    #[serde(default = "default_fsize_maybe")]
+    pub send: Option<f64>,
+    #[serde(default = "default_fsize_maybe")]
+    pub wait: Option<f64>,
+    #[serde(default = "default_fsize_maybe")]
+    pub receive: Option<f64>,
     #[serde(default = "default_fsize_maybe")]
     pub ssl: Option<f64>,
     pub comment: Option<String>,
