@@ -1,6 +1,6 @@
 [package]
 name = "har"
-version = "0.8.1"
+version = "0.8.0"
 authors = ["Sebastian Mandrean <sebastian.mandrean@gmail.com>"]
 edition = "2021"
 description = "A HTTP Archive format (HAR) serialization & deserialization library."
@@ -13,9 +13,9 @@ keywords = ["har", "serialization", "deserialization", "json", "yaml"]
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-serde_with = "2.1"
+serde_with = "3.11"
 serde_yaml = "0.9"
 thiserror = "1.0"
 
 [dev-dependencies]
-glob = "0.3.0"
+glob = "0.3"
