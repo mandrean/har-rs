@@ -1,30 +1,19 @@
-#![allow(dead_code, unused_imports)]
-use har::{from_path, to_json, Error};
-use std::io::Write;
+use har::{from_path, to_json};
 
 fn main() {
-    if let Some(path) = std::env::args().nth(1) {
-        match har::from_path(path) {
-            Ok(spec) => {
-                /*for (path, op) in spec.paths {
-                    println!("{}", path);
-                    println!("{:#?}", op);
-                }
-                for (name, definition) in spec.definitions {
-                    println!("{}", name);
-                    println!("{:#?}", definition);
-                }*/
-                println!("{}", har::to_json(&spec).unwrap());
-            }
-            Err(e) => {
-                match e {
-                    Error::Io(e) => eprintln!("{}", e),
-                    Error::Yaml(e) => eprintln!("{}", e),
-                    Error::Json(e) => eprintln!("{}", e),
-                }
+    let Some(path) = std::env::args_os().nth(1) else {
+        eprintln!("usage: cargo run --example printer -- <path-to.har>");
+        std::process::exit(2);
+    };
 
-                ::std::process::exit(1);
-            }
+    match from_path(&path) {
+        Ok(har) => {
+            let json = to_json(&har).expect("serializing parsed HAR as JSON should succeed");
+            println!("{json}");
+        }
+        Err(error) => {
+            eprintln!("{error}");
+            std::process::exit(1);
         }
     }
 }
