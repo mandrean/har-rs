@@ -1,3 +1,21 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.9.0](https://github.com/mandrean/har-rs/compare/v0.8.1...v0.9.0) - 2026-03-21
+
+### Added
+
+- gate YAML support behind opt-in feature ([#36](https://github.com/mandrean/har-rs/pull/36))
+
+### Other
+
+- Refresh crate with Rust 2024, release-plz, and clearer parsing errors ([#34](https://github.com/mandrean/har-rs/pull/34))
 <a name="v0.8.1"></a>
 ## v0.8.1 (2024-10-15)
 
