@@ -11,9 +11,17 @@ documentation = "https://docs.rs/har"
 readme = "README.md"
 keywords = ["har", "serialization", "deserialization", "json", "yaml"]
 
+[package.metadata.docs.rs]
+features = ["yaml"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+default = []
+yaml = ["dep:yaml_serde"]
+
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
 serde_with = "3.18.0"
-serde_yaml = "0.9.34"
 thiserror = "2.0.18"
+yaml_serde = { version = "0.10.4", optional = true }

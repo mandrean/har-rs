@@ -1,3 +1,5 @@
+#[cfg(feature = "yaml")]
+use har::to_yaml;
 use har::{Error, HarVersion, Spec, from_path, from_slice, from_str};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -124,6 +126,35 @@ fn from_str_matches_from_path() {
         let from_disk = from_path(&fixture).expect("fixture path should deserialize");
         assert_eq!(from_text, from_disk, "fixture {}", fixture.display());
     }
+}
+
+#[cfg(feature = "yaml")]
+#[test]
+fn can_serialize_to_yaml_when_feature_is_enabled() {
+    let input = r#"{
+      "log": {
+        "version": "1.2",
+        "creator": { "name": "example", "version": "1.0" },
+        "entries": []
+      }
+    }"#;
+
+    let har = from_str(input).expect("input should deserialize");
+    let yaml = to_yaml(&har).expect("serializing parsed HAR as YAML should succeed");
+
+    assert!(yaml.contains("log:"), "unexpected YAML output: {yaml}");
+    assert!(yaml.contains("creator:"), "unexpected YAML output: {yaml}");
+    assert!(
+        yaml.contains("name: example"),
+        "unexpected YAML output: {yaml}"
+    );
+    assert!(
+        yaml.contains("version: '1.2'")
+            || yaml.contains("version: \"1.2\"")
+            || yaml.contains("version: 1.2"),
+        "unexpected YAML output: {yaml}"
+    );
+    assert!(yaml.contains("entries:"), "unexpected YAML output: {yaml}");
 }
 
 #[test]

@@ -11,17 +11,26 @@ har-rs
 Install
 -------
 
-Add the following to your `Cargo.toml` file:
+JSON-only use (default):
 
 ```toml
 [dependencies]
 har = "0.8"
 ```
 
+Enable YAML serialization:
+
+```toml
+[dependencies]
+har = { version = "0.8", features = ["yaml"] }
+```
+
 Use
 ---
 
-HAR input is parsed from JSON. The crate can serialize parsed documents back to JSON or YAML.
+HAR input is always parsed from JSON.
+JSON serialization is available by default.
+YAML serialization through `to_yaml` is available only when the `yaml` feature is enabled.
 
 ```rust
 use har::{from_str, to_json, HarVersion};
@@ -39,6 +48,26 @@ fn main() -> Result<(), har::Error> {
     assert_eq!(har.version(), HarVersion::V1_2);
 
     println!("{}", to_json(&har)?);
+    Ok(())
+}
+```
+
+With the `yaml` feature enabled, you can also serialize parsed HAR documents as YAML:
+
+```rust
+use har::{from_str, to_yaml};
+
+fn main() -> Result<(), har::Error> {
+    let input = r#"{
+        "log": {
+            "version": "1.2",
+            "creator": { "name": "example", "version": "1.0" },
+            "entries": []
+        }
+    }"#;
+
+    let har = from_str(input)?;
+    println!("{}", to_yaml(&har)?);
     Ok(())
 }
 ```
