@@ -1,7 +1,10 @@
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
 //! HTTP Archive (HAR) serialization and deserialization helpers.
 //!
-//! The crate accepts HAR input as JSON and can serialize parsed documents back to
-//! JSON or YAML.
+//! HAR input is always parsed from JSON.
+//! JSON serialization is available by default.
+//! Enable the crate feature `yaml` to serialize parsed documents with `to_yaml`.
 
 use serde::{Deserialize, Serialize};
 use std::fmt;
@@ -25,10 +28,12 @@ pub enum Error {
         #[source]
         source: serde_json::Error,
     },
+    #[cfg(feature = "yaml")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "yaml")))]
     #[error("failed to encode HAR as YAML")]
     EncodeYaml {
         #[source]
-        source: serde_yaml::Error,
+        source: yaml_serde::Error,
     },
     #[error("failed to encode HAR as JSON")]
     EncodeJson {
@@ -52,7 +57,8 @@ impl Error {
         Self::DecodeJson { source }
     }
 
-    fn encode_yaml(source: serde_yaml::Error) -> Self {
+    #[cfg(feature = "yaml")]
+    fn encode_yaml(source: yaml_serde::Error) -> Self {
         Self::EncodeYaml { source }
     }
 
@@ -171,8 +177,29 @@ where
 }
 
 /// Serialize a HAR to a YAML string.
+///
+/// Available with the crate feature `yaml`.
+///
+/// ```
+/// use har::{from_str, to_yaml};
+///
+/// let input = r#"{
+///   "log": {
+///     "version": "1.2",
+///     "creator": { "name": "example", "version": "1.0" },
+///     "entries": []
+///   }
+/// }"#;
+///
+/// let har = from_str(input)?;
+/// let yaml = to_yaml(&har)?;
+/// assert!(yaml.contains("version"));
+/// # Ok::<(), har::Error>(())
+/// ```
+#[cfg(feature = "yaml")]
+#[cfg_attr(docsrs, doc(cfg(feature = "yaml")))]
 pub fn to_yaml(spec: &Har) -> Result<String, Error> {
-    serde_yaml::to_string(spec).map_err(Error::encode_yaml)
+    yaml_serde::to_string(spec).map_err(Error::encode_yaml)
 }
 
 /// Serialize a HAR to a JSON string.
