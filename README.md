@@ -15,7 +15,7 @@ JSON-only use (default):
 
 ```toml
 [dependencies]
-har = "0.8"
+har = "0.9"
 ```
 
 Enable YAML serialization:
