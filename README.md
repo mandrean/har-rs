@@ -22,7 +22,7 @@ Enable YAML serialization:
 
 ```toml
 [dependencies]
-har = { version = "0.8", features = ["yaml"] }
+har = { version = "0.9", features = ["yaml"] }
 ```
 
 Use
